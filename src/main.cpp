@@ -2,6 +2,8 @@
 #include "sprite.h"
 #include "gl_program.h"
 
+using namespace collapsed; 
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 }
@@ -32,6 +34,9 @@ int main(int argc, char **argv) {
   glfwSetKeyCallback(window, key_callback);
   glewExperimental = GL_TRUE;
   glewInit();
+
+  SpriteAsset sprite_asset;
+  Sprite sprite;
 
   while(!glfwWindowShouldClose(window)) {
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
