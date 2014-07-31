@@ -7,20 +7,20 @@
 namespace collapsed {
   class SpriteAsset {
     public:
-      SpriteAsset();
-
-    private:
-      GLuint vbo, vao;
-      GLProgram *program;
+      SpriteAsset(GLProgram *program);
+      GLuint m_vbo, m_vao;
+      GLProgram *m_program;
+      float m_mesh[8];
       //Texture *texture;
-      float boundx, boundy;
   };
 
   class Sprite {
     public:
-      Sprite();
+      Sprite(SpriteAsset *asset);
       void set_pos(float x, float y);
       void offset_pos(float x, float y);
+
+      SpriteAsset *m_asset;
     private:
       glm::vec2 pos;
   };

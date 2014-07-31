@@ -10,7 +10,6 @@ GLProgram::GLProgram(const std::string &vshader, const std::string &fshader) {
   if((m_fshader = make_shader(fshader, GL_FRAGMENT_SHADER)) == -1) {
     std::cout << "could not load fshader " << fshader << std::endl;
   }
-  //todo EXCEPTIONS
 
   if((m_program = make_program(m_vshader, m_fshader)) == -1) {
     std::cout << "could not make program" << std::endl;

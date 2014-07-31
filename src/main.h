@@ -4,6 +4,8 @@
 #include <iostream>
 #include <unistd.h>
 #include <math.h>
+#include <vector>
+#include <string>
 
 #include <GL/glew.h>
 #define GLFW_DLL
