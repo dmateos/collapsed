@@ -14,4 +14,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
+#define XRES 1024
+#define YRES 768
+
 #endif

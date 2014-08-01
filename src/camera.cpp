@@ -9,13 +9,15 @@ Camera::Camera() :
 }
 
 void Camera::set_position(glm::vec2 &position) {
-
+  m_position = position;
 }
 
 void Camera::offset_position(glm::vec2 &position) {
-
+  m_position += position;
 }
 
 glm::mat4 Camera::matrix() {
-    return glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f,-0.1f, 1.0f);
+    return glm::ortho(-10.0f, 10.0f, -10.0f, 10.0f) * 
+      glm::translate(glm::mat4(), glm::vec3(m_position, 0.0));
+   // return glm::ortho(0, (float)XRES, (float)YRES, 0);
 }

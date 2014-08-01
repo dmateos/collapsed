@@ -26,7 +26,7 @@ int main(int argc, char **argv) {
   glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
   glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-  if(!(window = glfwCreateWindow(1024, 768, "", NULL, NULL))) {
+  if(!(window = glfwCreateWindow(XRES, YRES, "", NULL, NULL))) {
     std::cout << "could not make glfw window" << std::endl;
     return 1;
   }
@@ -38,7 +38,9 @@ int main(int argc, char **argv) {
 
   GLProgram program("shaders/vshader.gsl", "shaders/fshader.gsl");
   Camera camera;
-  SpriteAsset sprite_asset(&program);
+
+  Texture texture;
+  SpriteAsset sprite_asset(&program, &texture);
   Sprite sprite(&sprite_asset);
 
   while(!glfwWindowShouldClose(window)) {
@@ -47,8 +49,10 @@ int main(int argc, char **argv) {
 
     sprite.m_asset->m_program->use();
     sprite.m_asset->m_program->set_uniform("camera", camera.matrix());
+
     glBindVertexArray(sprite.m_asset->m_vao);
-    glDrawArrays(GL_TRIANGLES, 0, 8);
+    sprite.m_asset->m_texture->bind_texture();
+    glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
 
     glfwSwapBuffers(window);
     glfwPollEvents();

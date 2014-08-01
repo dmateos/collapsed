@@ -3,6 +3,7 @@ client_objects = \
 	build/sprite.o \
 	build/gl_program.o \
 	build/camera.o \
+	build/texture.o \
 
 client_flags = -lglfw3 -lglew -lassimp -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
@@ -23,6 +24,9 @@ build/gl_program.o: src/gl_program.cpp
 
 build/camera.o: src/camera.cpp
 	$(CXX) -c -o $@ src/camera.cpp
+
+build/texture.o: src/texture.cpp
+	$(CXX) -c -o $@ src/texture.cpp
 
 clean:
 	rm -rf build/*.o collapsed
