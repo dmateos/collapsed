@@ -22,6 +22,7 @@ namespace collapsed {
       void set_pos(float x, float y);
       glm::vec2 get_pos() const;
       void offset_pos(float x, float y);
+      void animation_step(float step);
 
       SpriteAsset *m_asset;
     private:

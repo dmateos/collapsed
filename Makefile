@@ -5,7 +5,7 @@ client_objects = \
 	build/camera.o \
 	build/texture.o \
 
-client_flags = -lglfw3 -lglew -lassimp -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
+client_flags = -lglfw3 -lglew -lassimp -lil -lilu -lilut -framework Cocoa -framework OpenGL -framework IOKit -framework CoreVideo
 
 all: collapsed
 

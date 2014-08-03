@@ -5,6 +5,10 @@
 
 using namespace collapsed; 
 
+struct game_state {
+  std::vector<Sprite*> sprites;
+};
+
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
 
 }
@@ -39,7 +43,7 @@ int main(int argc, char **argv) {
   GLProgram program("shaders/vshader.gsl", "shaders/fshader.gsl");
   Camera camera;
 
-  Texture texture;
+  Texture texture("assets/grid.png");
   SpriteAsset sprite_asset(&program, &texture);
   Sprite sprite(&sprite_asset);
 

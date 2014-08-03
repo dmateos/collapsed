@@ -6,7 +6,7 @@
 namespace collapsed {
   class Texture {
     public:
-      Texture();
+      Texture(const std::string &path);
       void bind_texture() const;
     private:
       GLuint m_tex;

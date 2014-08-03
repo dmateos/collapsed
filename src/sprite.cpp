@@ -6,11 +6,13 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   m_program(program),
   m_texture(texture)
 {
+  float xframe = 0.5;
+  float yframe = 1.0;
   float verticies[] = {
-    -1.0f, +1.0f, 0.0f, 0.0f,
-    +1.0f, +1.0f, 1.0f, 0.0f,
-    +1.0f, -1.0f, 1.0f, 1.0f,
-    -1.0f, -1.0f, 0.0f, 1.0f
+    -5.0f, +5.0f, xframe, xframe,
+    +5.0f, +5.0f, yframe, xframe,
+    +5.0f, -5.0f, yframe, yframe,
+    -5.0f, -5.0f, xframe, yframe
   };
 
   GLuint elements[] = {
@@ -62,4 +64,8 @@ glm::vec2 Sprite::get_pos() const {
 void Sprite::offset_pos(float x, float y) {
   m_pos.x += x;
   m_pos.y += y;
+}
+
+void Sprite::animation_step(float step) {
+  
 }
