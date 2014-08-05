@@ -13,7 +13,7 @@ namespace collapsed {
       GLuint m_vbo, m_vao, m_veo;
       GLProgram *m_program;
       Texture *m_texture;
-      float m_mesh[8];
+      float m_verticies[16];
   };
 
   class Sprite {

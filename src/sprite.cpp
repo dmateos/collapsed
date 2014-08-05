@@ -6,14 +6,27 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   m_program(program),
   m_texture(texture)
 {
-  float xframe = 0.5;
-  float yframe = 1.0;
+  float width = 512.0f;
+  float height = 256.0f;
+
+  float tw = 32.0f;
+  int tpx = 0;
+  int tpy = 0;
+
+  float tl = (tw * tpx) / width;
+  float bl = (tw * tpx) / height;
+  float tr = ((tw * tpx)) / width + (tw/width);
+  float br = ((tw * tpx)) / height + (tw/height);
+
   float verticies[] = {
-    -5.0f, +5.0f, xframe, xframe,
-    +5.0f, +5.0f, yframe, xframe,
-    +5.0f, -5.0f, yframe, yframe,
-    -5.0f, -5.0f, xframe, yframe
+    -5.0f, +5.0f, 0.0, 0.0, //top left
+    +5.0f, +5.0f, tr, 0.0,  //top right
+    +5.0f, -5.0f, tr, br, //bottom right
+    -5.0f, -5.0f, 0.0, br //bottom left
   };
+
+  std::cout << tr << " " << br << " " << tl << " " << bl << std::endl;
+  memcpy(&m_verticies, verticies, sizeof(verticies));
 
   GLuint elements[] = {
     0, 1, 2,
@@ -26,7 +39,7 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   /* Setup a buffer for our verticies. */
   glGenBuffers(1, &m_vbo);
   glBindBuffer(GL_ARRAY_BUFFER, m_vbo);
-  glBufferData(GL_ARRAY_BUFFER, sizeof(verticies), verticies, GL_STATIC_DRAW);
+  glBufferData(GL_ARRAY_BUFFER, sizeof(m_verticies), m_verticies, GL_STATIC_DRAW);
 
   /* One for our vertecies indexes */
   glGenBuffers(1, &m_veo);
@@ -67,5 +80,4 @@ void Sprite::offset_pos(float x, float y) {
 }
 
 void Sprite::animation_step(float step) {
-  
 }

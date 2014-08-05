@@ -43,7 +43,7 @@ int main(int argc, char **argv) {
   GLProgram program("shaders/vshader.gsl", "shaders/fshader.gsl");
   Camera camera;
 
-  Texture texture("assets/grid.png");
+  Texture texture("assets/circle.png");
   SpriteAsset sprite_asset(&program, &texture);
   Sprite sprite(&sprite_asset);
 
