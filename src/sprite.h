@@ -8,7 +8,7 @@
 namespace collapsed {
   class SpriteAsset {
     public:
-      SpriteAsset(GLProgram *program, Texture *texture);
+      SpriteAsset(GLProgram *program, Texture *texture, int tilex, int tiley);
 
       GLuint m_vbo, m_vao, m_veo;
       GLProgram *m_program;

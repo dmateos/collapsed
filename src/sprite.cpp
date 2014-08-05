@@ -2,7 +2,7 @@
 
 using namespace collapsed;
 
-SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
+SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture, int tpx, int tpy) :
   m_program(program),
   m_texture(texture)
 {
@@ -10,8 +10,6 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   float height = 672.0f;
 
   float tw = 32.0f;
-  int tpx = 0;
-  int tpy = 0;
 
   float xl = (tw * tpx) / width;
   float yl = (tw * tpy) / height;

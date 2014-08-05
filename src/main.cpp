@@ -26,6 +26,9 @@ static void key_callback(GLFWwindow* window, int key, int scancode, int action, 
     case GLFW_KEY_D:
       gs.avatar->offset_pos(+10.0, 0.0);
       break;
+    case GLFW_KEY_O:
+      glPolygonMode(GL_FRONT_AND_BACK, GL_FILL );
+      break;
   }
 }
 
@@ -64,17 +67,24 @@ int main(int argc, char **argv) {
   GLProgram program("shaders/vshader.gsl", "shaders/fshader.gsl");
 
   Texture texture("assets/rpg.png");
-  SpriteAsset sprite_asset(&program, &texture);
+  SpriteAsset sprite_asset_grass(&program, &texture, 0, 0);
+  SpriteAsset sprite_asset_tree(&program, &texture, 0, 1);
+  SpriteAsset sprite_asset_avatar(&program, &texture, 1, 3);
   
-  for(float x = 0.0; x < 100.0; x += 5.0) {
-    for(float y = 0.0; y < 100.0; y += 5.0) {
-      Sprite *s = new Sprite(&sprite_asset); 
+  for(float x = -100.0; x < 100.0; x += 10.0) {
+    for(float y = -100.0; y < 100.0; y += 10.0) {
+      int n = rand() % 10;
+      Sprite *s;
+      if(n < 8)
+        s = new Sprite(&sprite_asset_grass); 
+      else 
+        s = new Sprite(&sprite_asset_tree);
       s->offset_pos(x, y);
       gs.sprites.push_back(s);
     }
   }
 
-  gs.avatar = new Sprite(&sprite_asset);
+  gs.avatar = new Sprite(&sprite_asset_avatar);
   gs.sprites.push_back(gs.avatar);
 
   while(!glfwWindowShouldClose(window)) {
