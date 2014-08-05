@@ -10,22 +10,21 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   float height = 256.0f;
 
   float tw = 32.0f;
-  int tpx = 0;
-  int tpy = 0;
+  int tpx = 1;
+  int tpy = 7;
 
-  float tl = (tw * tpx) / width;
-  float bl = (tw * tpx) / height;
-  float tr = ((tw * tpx)) / width + (tw/width);
-  float br = ((tw * tpx)) / height + (tw/height);
+  float xl = (tw * tpx) / width;
+  float yl = (tw * tpy) / height;
+  float xr = ((tw * tpx)) / width + (tw/width);
+  float yr = ((tw * tpy)) / height + (tw/height);
 
   float verticies[] = {
-    -5.0f, +5.0f, 0.0, 0.0, //top left
-    +5.0f, +5.0f, tr, 0.0,  //top right
-    +5.0f, -5.0f, tr, br, //bottom right
-    -5.0f, -5.0f, 0.0, br //bottom left
+    -5.0f, +5.0f, xl, yl, //top left
+    +5.0f, +5.0f, xr, yl,  //top right
+    +5.0f, -5.0f, xr, yr, //bottom right
+    -5.0f, -5.0f, xl, yr //bottom left
   };
 
-  std::cout << tr << " " << br << " " << tl << " " << bl << std::endl;
   memcpy(&m_verticies, verticies, sizeof(verticies));
 
   GLuint elements[] = {
