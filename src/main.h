@@ -16,5 +16,6 @@
 
 #define XRES 1024
 #define YRES 768
+#define ZOOM 10
 
 #endif

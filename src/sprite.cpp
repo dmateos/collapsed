@@ -6,17 +6,17 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture) :
   m_program(program),
   m_texture(texture)
 {
-  float width = 512.0f;
-  float height = 256.0f;
+  float width = 736.0f;
+  float height = 672.0f;
 
   float tw = 32.0f;
-  int tpx = 1;
-  int tpy = 7;
+  int tpx = 0;
+  int tpy = 0;
 
   float xl = (tw * tpx) / width;
   float yl = (tw * tpy) / height;
-  float xr = ((tw * tpx)) / width + (tw/width);
-  float yr = ((tw * tpy)) / height + (tw/height);
+  float xr = (tw * tpx) / width + (tw/width);
+  float yr = (tw * tpy) / height + (tw/height);
 
   float verticies[] = {
     -5.0f, +5.0f, xl, yl, //top left
