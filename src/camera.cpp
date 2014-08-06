@@ -12,6 +12,10 @@ void Camera::set_position(const glm::vec2 &position) {
   m_position = position;
 }
 
+glm::vec2 Camera::get_position() {
+  return m_position;
+}
+
 void Camera::offset_position(const glm::vec2 &position) {
   m_position += position;
 }

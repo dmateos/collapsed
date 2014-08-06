@@ -8,6 +8,7 @@ namespace collapsed {
     public:
       Camera();
       void set_position(const glm::vec2 &position);
+      glm::vec2 get_position();
       void offset_position(const glm::vec2 &position);
       glm::mat4 matrix(); 
     private:

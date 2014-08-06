@@ -56,24 +56,24 @@ SpriteAsset::SpriteAsset(GLProgram *program, Texture *texture, int tpx, int tpy)
 }
 
 Sprite::Sprite(SpriteAsset *asset) :
-  m_pos(0.0, 0.0),
+  m_position(0.0, 0.0),
   m_asset(asset)
 {
 
 }
 
-void Sprite::set_pos(float x, float y) {
-  m_pos.x = x;
-  m_pos.y = y;
+void Sprite::set_position(float x, float y) {
+  m_position.x = x;
+  m_position.y = y;
 }
 
-glm::vec2 Sprite::get_pos() const {
-  return m_pos;
+glm::vec2 Sprite::get_position() const {
+  return m_position;
 }
 
-void Sprite::offset_pos(float x, float y) {
-  m_pos.x += x;
-  m_pos.y += y;
+void Sprite::offset_position(float x, float y) {
+  m_position.x += x;
+  m_position.y += y;
 }
 
 void Sprite::animation_step(float step) {

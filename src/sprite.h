@@ -19,14 +19,14 @@ namespace collapsed {
   class Sprite {
     public:
       Sprite(SpriteAsset *asset);
-      void set_pos(float x, float y);
-      glm::vec2 get_pos() const;
-      void offset_pos(float x, float y);
+      void set_position(float x, float y);
+      glm::vec2 get_position() const;
+      void offset_position(float x, float y);
       void animation_step(float step);
 
       SpriteAsset *m_asset;
     private:
-      glm::vec2 m_pos;
+      glm::vec2 m_position;
   };
 }
 

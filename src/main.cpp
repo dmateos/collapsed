@@ -15,16 +15,16 @@ struct game_state {
 static void key_callback(GLFWwindow* window, int key, int scancode, int action, int mods) {
   switch(key) {
     case GLFW_KEY_W:
-      gs.avatar->offset_pos(0.0, +10.0);
+      gs.avatar->offset_position(0.0, +10.0);
       break;
     case GLFW_KEY_S:
-      gs.avatar->offset_pos(0.0, -10.0);
+      gs.avatar->offset_position(0.0, -10.0);
       break;
     case GLFW_KEY_A:
-      gs.avatar->offset_pos(-10.0, 0.0);
+      gs.avatar->offset_position(-10.0, 0.0);
       break;
     case GLFW_KEY_D:
-      gs.avatar->offset_pos(+10.0, 0.0);
+      gs.avatar->offset_position(+10.0, 0.0);
       break;
     case GLFW_KEY_O:
       glPolygonMode(GL_FRONT_AND_BACK, GL_FILL );
@@ -71,15 +71,18 @@ int main(int argc, char **argv) {
   SpriteAsset sprite_asset_tree(&program, &texture, 0, 1);
   SpriteAsset sprite_asset_avatar(&program, &texture, 1, 3);
   
-  for(float x = -100.0; x < 100.0; x += 10.0) {
-    for(float y = -100.0; y < 100.0; y += 10.0) {
+  for(float x = -100.0; x < 500.0; x += 10.0) {
+    for(float y = -100.0; y < 500.0; y += 10.0) {
       int n = rand() % 10;
       Sprite *s;
-      if(n < 8)
+      if(n < 8) {
         s = new Sprite(&sprite_asset_grass); 
-      else 
+      }
+      else { 
         s = new Sprite(&sprite_asset_tree);
-      s->offset_pos(x, y);
+      }
+
+      s->offset_position(x, y);
       gs.sprites.push_back(s);
     }
   }
@@ -93,12 +96,15 @@ int main(int argc, char **argv) {
 
     for(std::vector<Sprite*>::iterator it = gs.sprites.begin(); it != gs.sprites.end(); it++) {
       Sprite *sprite = *it;
-      sprite->m_asset->m_program->use();
-      sprite->m_asset->m_program->set_uniform("transform", glm::translate(glm::mat4(), glm::vec3(sprite->get_pos(), 1.0)));
-      sprite->m_asset->m_program->set_uniform("camera", gs.camera.matrix());
-      glBindVertexArray(sprite->m_asset->m_vao);
-      sprite->m_asset->m_texture->bind_texture();
-      glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+      if(sprite->get_position().x > gs.camera.get_position().x && sprite->get_position().y > gs.camera.get_position().y) {
+        sprite->m_asset->m_program->use();
+        sprite->m_asset->m_program->set_uniform("transform", glm::translate(glm::mat4(), glm::vec3(sprite->get_position(), 1.0)));
+        sprite->m_asset->m_program->set_uniform("camera", gs.camera.matrix());
+        glBindVertexArray(sprite->m_asset->m_vao);
+        sprite->m_asset->m_texture->bind_texture();
+        glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+      }
     }
 
     handle_mouse(window);
