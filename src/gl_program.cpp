@@ -3,19 +3,19 @@
 using namespace collapsed;
 
 GLProgram::GLProgram(const std::string &vshader, const std::string &fshader) {
-  if((m_vshader = make_shader(vshader, GL_VERTEX_SHADER)) == -1) {
-    std::cout << "could not load vshader " << vshader << std::endl;
+  if((m_vshader = make_shader(vshader, GL_VERTEX_SHADER)) == 0) {
+    printf("could not load vshader %s\n", vshader.c_str());
   }
 
-  if((m_fshader = make_shader(fshader, GL_FRAGMENT_SHADER)) == -1) {
-    std::cout << "could not load fshader " << fshader << std::endl;
+  if((m_fshader = make_shader(fshader, GL_FRAGMENT_SHADER)) == 0) {
+    printf("could not load fshader %s\n", fshader.c_str());
   }
 
-  if((m_program = make_program(m_vshader, m_fshader)) == -1) {
-    std::cout << "could not make program" << std::endl;
+  if((m_program = make_program(m_vshader, m_fshader)) == 0) {
+    printf("could not make program\n");
   }
 
-  std::cout << "loaded program with shader " << vshader << " and " << fshader << std::endl;;
+  printf("loaded progam with shader %s and %s\n", vshader.c_str(), fshader.c_str());
 }
 
 void GLProgram::use() {
@@ -30,9 +30,6 @@ GLint GLProgram::get_attrib(const std::string &attrib_name) const {
 GLint GLProgram::get_uniform(const std::string &attrib_name) const {
   GLint attrib = glGetUniformLocation(m_program, attrib_name.c_str());
   return attrib;
-}
-
-void GLProgram::set_attrib(const std::string &attrib_name, const glm::mat4 &ptr) {
 }
 
 void GLProgram::set_uniform(const std::string &attrib_name, const glm::mat4 &ptr) {
@@ -60,9 +57,9 @@ GLuint GLProgram::make_shader(const std::string &path, GLenum stype) const {
   /* Check for compile issues. */
   glGetShaderiv(shader, GL_COMPILE_STATUS, &shader_ok);
   if(!shader_ok) {
-    std::cout << path << "did not compile" << std::endl;
+    printf("%s did not compile\n", path.c_str());
     glDeleteShader(shader);
-    return -1;
+    return 0;
   }
 
   return shader;
@@ -79,8 +76,8 @@ GLint GLProgram::make_program(GLint vshader, GLint fshader) const {
   /* Did it work? */
   glGetProgramiv(shader_program, GL_LINK_STATUS, &program_ok);
   if(!program_ok) {
-    std::cout << "program did not compile" << std::endl;
-    return -1;
+    printf("program did not compile\n");
+    return 0;
   }
 
   return shader_program;

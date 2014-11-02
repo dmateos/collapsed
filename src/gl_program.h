@@ -12,8 +12,6 @@ namespace collapsed {
       void use();
       GLint get_attrib(const std::string &attrib_name) const;
       GLint get_uniform(const std::string &attrib_name) const;
-      void set_attrib(const std::string &attrib_name, const glm::mat4 &ptr);
-      
       void set_uniform(const std::string &attrib_name, const glm::mat4 &ptr);
 
     private:
@@ -23,6 +21,6 @@ namespace collapsed {
       GLuint make_shader(const std::string &path, GLenum stype) const;
       GLint make_program(GLint vshader, GLint fshader) const;
     };
-};
+}
 
 #endif
